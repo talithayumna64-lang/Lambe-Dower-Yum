@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lambe Dower</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+background:linear-gradient(#ffd6e2,#ffb3c7);
+}
+
+.navbar{
+background:#ffb3c7;
+padding:15px;
+}
+
+.navbar-brand{
+font-size:30px;
+font-weight:bold;
+color:#ff2b45!important;
+}
+
+.search{
+padding:8px 12px;
+border:none;
+border-radius:10px;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+color:white;
+background:#ff8fb1;
+}
+
+.hero h1{
+font-size:60px;
+font-weight:bold;
+}
+
+.btn-custom{
+background:#ff2b45;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:12px;
+}
+
+.card{
+border:none;
+border-radius:20px;
+padding:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.card img{
+height:220px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.total-box{
+background:white;
+padding:25px;
+border-radius:20px;
+margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar fixed-top">
+<div class="container d-flex justify-content-between">
+<span class="navbar-brand">🌶 Lambe Dower</span>
+
+<div>
+<input type="text" id="searchMenu" class="search" placeholder="Cari..." onkeyup="cariMenu()">
+
+<button class="btn btn-light"
+data-bs-toggle="modal"
+data-bs-target="#loginModal">
+Login
+</button>
+</div>
+</div>
+</nav>
+
+<!-- LOGIN -->
+<div class="modal fade" id="loginModal">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content p-4">
+
+<h2>Login</h2>
+
+<input type="text" class="form-control mb-3" placeholder="Nomor Telepon">
+
+<button class="btn btn-danger">
+Masuk
+</button>
+
+</div>
+</div>
+</div>
+
+<!-- SLIDE -->
+<div id="slide" class="carousel slide">
+<div class="carousel-inner">
+
+<!-- HOME -->
+<div class="carousel-item active">
+
+<section class="hero">
+
+<div>
+
+<h1>Lambe Dower 🌶</h1>
+
+<p>
+Seblak pedas dengan topping favorit dan rasa gurih bikin nagih
+</p>
+
+<button class="btn-custom"
+data-bs-target="#slide"
+data-bs-slide="next">
+
+Pesan Sekarang 🍜
+
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- MENU -->
+<div class="carousel-item">
+
+<div class="container py-5 mt-5">
+
+<div class="d-flex justify-content-between mb-4">
+
+<h2>Menu Favorit 💗</h2>
+
+<button class="btn-custom"
+data-bs-target="#slide"
+data-bs-slide="prev">
+
+Home
+
+</button>
+
+</div>
+
+<div class="row g-4">
+
+<!-- CARD -->
+<div class="col-md-4 menu-card">
+<div class="card">
+
+<img src="setan.png" class="w-100">
+
+<h4 class="mt-3">Seblak Setan</h4>
+
+<p>Rp20.000</p>
+
+<div id="top1">
+
+<label>Sosis</label>
+<input type="number" min="0"
+class="form-control mb-2"
+value="0"
+data-nama="Sosis"
+data-harga="5000">
+
+<label>Telur</label>
+<input type="number" min="0"
+class="form-control mb-2"
+value="0"
+data-nama="Telur"
+data-harga="3000">
+
+</div>
+
+<button onclick="tambahItem('Seblak Setan',20000,'top1')"
+class="btn-custom w-100">
+
++ Tambah
+
+</button>
+
+</div>
+</div>
+
+<!-- CARD -->
+<div class="col-md-4 menu-card">
+<div class="card">
+
+<img src="angel.png" class="w-100">
+
+<h4 class="mt-3">Seblak Angel</h4>
+
+<p>Rp12.000</p>
+
+<div id="top2">
+
+<label>Bakso</label>
+<input type="number" min="0"
+class="form-control mb-2"
+value="0"
+data-nama="Bakso"
+data-harga="4000">
+
+</div>
+
+<button onclick="tambahItem('Seblak Angel',12000,'top2')"
+class="btn-custom w-100">
+
++ Tambah
+
+</button>
+
+</div>
+</div>
+
+<!-- CARD -->
+<div class="col-md-4 menu-card">
+<div class="card">
+
+<img src="komplit.png" class="w-100">
+
+<h4 class="mt-3">Seblak Super</h4>
+
+<p>Rp30.000</p>
+
+<div id="top3">
+
+<label>Ceker</label>
+<input type="number" min="0"
+class="form-control mb-2"
+value="0"
+data-nama="Ceker"
+data-harga="4000">
+
+</div>
+
+<button onclick="tambahItem('Seblak Super',30000,'top3')"
+class="btn-custom w-100">
+
++ Tambah
+
+</button>
+
+</div>
+</div>
+
+</div>
+
+<!-- KERANJANG -->
+<div class="total-box">
+
+<h3>🛒 Keranjang</h3>
+
+<ul id="keranjang" class="list-group mb-3"></ul>
+
+<h4>
+Total : Rp <span id="total">0</span>
+</h4>
+
+<button class="btn-custom w-100 mt-3"
+data-bs-target="#slide"
+data-bs-slide="next">
+
+Checkout
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CHECKOUT -->
+<div class="carousel-item">
+
+<div class="container py-5 mt-5">
+
+<div class="d-flex justify-content-between mb-4">
+
+<h2>Checkout</h2>
+
+<button class="btn-custom"
+data-bs-target="#slide"
+data-bs-slide="prev">
+
+Kembali
+
+</button>
+
+</div>
+
+<div class="total-box">
+
+<ul id="keranjangCheckout"
+class="list-group mb-3"></ul>
+
+<input type="text"
+class="form-control mb-3"
+placeholder="Alamat">
+
+<textarea
+class="form-control mb-3"
+placeholder="Catatan"></textarea>
+
+<h5>
+Total Bayar :
+Rp <span id="grandTotal">10000</span>
+</h5>
+
+<button onclick="checkout()"
+class="btn-custom w-100 mt-3">
+
+Bayar Sekarang
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+let total = 0;
+
+function tambahItem(nama,harga,id){
+
+let totalHarga = harga;
+let toping = [];
+
+document.querySelectorAll("#"+id+" input")
+.forEach(i=>{
+
+let j = parseInt(i.value)||0;
+
+if(j>0){
+
+totalHarga += j * i.dataset.harga;
+
+toping.push(
+i.dataset.nama+" x"+j
+);
+
+}
+
+});
+
+let teks =
+nama +
+(toping.length?" + "+toping.join(", "):"")+
+" = Rp"+totalHarga.toLocaleString("id-ID");
+
+["keranjang","keranjangCheckout"]
+.forEach(id=>{
+
+let li = document.createElement("li");
+
+li.className = "list-group-item";
+
+li.innerText = teks;
+
+document.getElementById(id)
+.appendChild(li);
+
+});
+
+total += totalHarga;
+
+document.getElementById("total")
+.innerText =
+total.toLocaleString("id-ID");
+
+document.getElementById("grandTotal")
+.innerText =
+(total+10000)
+.toLocaleString("id-ID");
+
+}
+
+function checkout(){
+
+if(total<=0){
+
+alert("Keranjang kosong 😭");
+return;
+
+}
+
+alert(
+"Pesanan berhasil 🎉\nTotal : Rp "+
+(total+10000).toLocaleString("id-ID")
+);
+
+}
+
+function cariMenu(){
+
+let input =
+document.getElementById("searchMenu")
+.value.toLowerCase();
+
+document.querySelectorAll(".menu-card")
+.forEach(card=>{
+
+card.style.display =
+card.innerText.toLowerCase()
+.includes(input)
+? "block" : "none";
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
